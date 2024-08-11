@@ -1,10 +1,11 @@
 package model.Humans;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
 
-public abstract class Human {
+public abstract class Human  implements Serializable {
     protected long id;
     protected String name;
     protected int age;

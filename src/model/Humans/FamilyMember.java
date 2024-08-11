@@ -2,11 +2,12 @@ package model.Humans;
 
 import model.familyTree.FamilyTree;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FamilyMember extends Human implements FamilyMemberComparable<FamilyMember>{
+public class FamilyMember extends Human implements FamilyMemberComparable<FamilyMember>, Serializable {
 
     private FamilyMember mother;
     private FamilyMember father;
@@ -80,17 +81,35 @@ public class FamilyMember extends Human implements FamilyMemberComparable<Family
 
     @Override
     public String toString() {
-        return "FamilyMember{" +
-                "id=" + id +
-                ", mother=" + mother +
-                ", father=" + father +
-                ", children=" + children +
-                ", name='" + name + '\'' +
-                ", age=" + age +
-                ", gender=" + gender +
-                ", birthDate=" + birthDate +
-                ", deathDate=" + deathDate +
-                '}';
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Name: ");
+        stringBuilder.append(name);
+        stringBuilder.append("; Gender: ");
+        stringBuilder.append(gender);
+        stringBuilder.append("; Age: ");
+        stringBuilder.append(getAge());
+        if(mother != null) {
+            stringBuilder.append("; Mother's name: ");
+            stringBuilder.append(mother.getName());
+        }
+        if(father != null) {
+            stringBuilder.append("; Father's name: ");
+            stringBuilder.append(father.getName());
+        }
+        if(children.size() != 0) {
+            stringBuilder.append("; Children's names: ");
+            boolean isFirst = true;
+            for(FamilyMember member : children){
+                if(isFirst) {
+                    isFirst = false;
+                } else {
+                    stringBuilder.append(", ");
+                }
+                stringBuilder.append(member.getName());
+            }
+        }
+        stringBuilder.append(";");
+        return stringBuilder.toString();
     }
 
     @Override

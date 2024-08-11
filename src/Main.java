@@ -1,10 +1,8 @@
-import model.Humans.FamilyMember;
-import model.Humans.Gender;
-
-import java.time.LocalDate;
+import view.*;
 
 public class Main {
     public static void main(String[] args) {
-        System
+        ConsoleUI view = new ConsoleUI();
+        view.start();
     }
 }

@@ -2,10 +2,11 @@ package model.familyTree;
 
 import model.Humans.FamilyMember;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FamilyTree {
+public class FamilyTree implements Serializable {
     private List<FamilyMember> tree;
 
     public FamilyTree(){
@@ -66,14 +67,22 @@ public class FamilyTree {
         stringBuilder.append(id);
         stringBuilder.append(". ");
         stringBuilder.append(tree.get(id - 1));
-        stringBuilder.append("\n");
         return stringBuilder.toString();
+    }
+    public void sortByName(){
+        tree.sort(new FamilyMemberComparatorByName<>());
+    }
+    public void sortByAge(){
+        tree.sort(new FamilyMemberComparatorByAge<>());
     }
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Family members:\n");
         for(int i = 0; i < tree.size(); i++){
-            showMemberFromList(i+1);
+
+            stringBuilder.append(showMemberFromList(i+1));
+            stringBuilder.append("\n");
         }
         return stringBuilder.toString();
     }
